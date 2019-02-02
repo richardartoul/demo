@@ -16,10 +16,10 @@ clusters:
   - namespaces:
       - namespace: raw_metrics
         type: unaggregated
-        retention: 48h
-      - namespace: metrics_5s_4320h
+        retention: 24h
+      - namespace: metrics_5s_168h
         type: aggregated
-        retention: 4320h
+        retention: 168h
         resolution: 5s
     client:
       config:
@@ -53,3 +53,16 @@ clusters:
 carbon:
   ingester:
     listenAddress: "0.0.0.0:7204"
+    rules:
+      - pattern: stats.sum.*
+        aggregation:
+          type: sum
+        policies:
+          - resolution: 5s
+            retention: 168h
+      - pattern: stats.mean
+        aggregation:
+          type: mean
+        policies:
+          - resolution: 5s
+            retention: 168h

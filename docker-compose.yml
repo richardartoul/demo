@@ -6,7 +6,7 @@ services:
       - backend
     image: quay.io/m3/m3dbnode:latest
     volumes:
-      - "./m3dbnode.yaml:/etc/m3dbnode/m3dbnode.yaml"
+      - "./m3dbnode.yml:/etc/m3dbnode/m3dbnode.yml"
     environment:
       - M3DB_HOST_ID=m3db_seed
 
@@ -21,14 +21,14 @@ services:
       - backend
     image: quay.io/m3/m3coordinator:latest
     volumes:
-      - "./m3coordinator.yaml:/etc/m3coordinator/m3coordinator.yaml"
+      - "./m3coordinator.yml:/etc/m3coordinator/m3coordinator.yml"
 
   prometheus01:
     networks:
       - backend
     image: prom/prometheus:latest
     volumes:
-      - "./prometheus.yaml/:/etc/prometheus/prometheus.yaml"
+      - "./prometheus.yml/:/etc/prometheus/prometheus.yml"
 
   grafana:
     expose:
@@ -37,6 +37,6 @@ services:
       - "0.0.0.0:3000:3000"
     networks:
       - backend
-    image: m3grafana:latest
+    image: grafana/grafana:latest
 networks:
   backend:
