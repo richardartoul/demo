@@ -11,13 +11,15 @@ This repository contains a docker-compose file which can be used to setup a demo
 
 ### Container Setup and Database Initialization
 
-```bash
-# Start all the containers. Note that if you'd like to reuse the underlying storage
-# between runs (I.E so that data and topology / namespaces are retained) then remove
-# the --force-renew-anon-volumes argument from the command below.
-docker-compose up --force-renew-anon-volumes
+Start all the containers. Note that if you'd like to reuse the underlying storage between runs (I.E so that data and topology / namespaces are retained) then remove the --force-renew-anon-volumes argument from the command below.
 
-# Create the initial placement.
+```bash
+docker-compose up --force-renew-anon-volumes
+```
+
+Create the initial placement.
+
+```bash
 curl -X POST localhost:7201/api/v1/placement/init -d '{
     "num_shards": 64,
     "replication_factor": 1,
@@ -33,8 +35,11 @@ curl -X POST localhost:7201/api/v1/placement/init -d '{
         }
     ]
 }' | jq  .
+```
 
-# Create the unaggregated namespace to store the raw data.
+Create the unaggregated namespace to store the raw data.
+
+```bash
 curl -X POST localhost:7201/api/v1/namespace -d '{
   "name": "raw_metrics",
   "options": {
@@ -58,8 +63,11 @@ curl -X POST localhost:7201/api/v1/namespace -d '{
     }
   }
 }' | jq .
+```
 
-# Create the aggregated namespace to store the aggregated data.
+Create the aggregated namespace to store the aggregated data.
+
+```bash
 curl -X POST localhost:7201/api/v1/namespace -d '{
   "name": "metrics_5s_168h",
   "options": {
