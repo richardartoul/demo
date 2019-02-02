@@ -103,7 +103,7 @@ Create a new panel to visualize the results with the following query: `transform
 ### Prometheus
 Add a new Prometheus data source with the URL: `http://m3coordinator01:7201`
 
-Data is already beings craped by Prometheus and written to M3, so add a new panel and visualize it with this sample query which shows the rate at which M3DB is writing to its commitlog: `sum(rate(commitlog_writes_success{}[30s]))`
+Data is already being scraped by Prometheus and written to M3, so add a new panel and visualize it with this sample query which shows the rate at which M3DB is writing to its commitlog: `sum(rate(commitlog_writes_success{}[30s]))`
 
 
 
