@@ -11,7 +11,7 @@ This repository contains a docker-compose file which can be used to setup a demo
 
 ### Container Setup and Database Initialization
 
-Start all the containers. Note that if you'd like to reuse the underlying storage between runs (I.E so that data and topology / namespaces are retained) then remove the --force-renew-anon-volumes argument from the command below.
+Start all the containers. Note that if you'd like to reuse the underlying storage between runs (I.E so that data and topology / namespaces are retained) then remove the `--force-renew-anon-volumes` argument from the command below.
 
 ```bash
 docker-compose up --force-renew-anon-volumes
