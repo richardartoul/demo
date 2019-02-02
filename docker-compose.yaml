@@ -1,0 +1,42 @@
+version: "3.5"
+services:
+
+  m3db_seed:
+    networks:
+      - backend
+    image: quay.io/m3/m3dbnode:latest
+    volumes:
+      - "./m3dbnode.yaml:/etc/m3dbnode/m3dbnode.yaml"
+    environment:
+      - M3DB_HOST_ID=m3db_seed
+
+  m3coordinator01:
+    expose:
+      - "7201"
+      - "7204"
+    ports:
+      - "0.0.0.0:7201:7201"
+      - "0.0.0.0:7204:7204"
+    networks:
+      - backend
+    image: quay.io/m3/m3coordinator:latest
+    volumes:
+      - "./m3coordinator.yaml:/etc/m3coordinator/m3coordinator.yaml"
+
+  prometheus01:
+    networks:
+      - backend
+    image: prom/prometheus:latest
+    volumes:
+      - "./prometheus.yaml/:/etc/prometheus/prometheus.yaml"
+
+  grafana:
+    expose:
+      - "3000"
+    ports:
+      - "0.0.0.0:3000:3000"
+    networks:
+      - backend
+    image: m3grafana:latest
+networks:
+  backend:
