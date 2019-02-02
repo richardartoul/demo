@@ -60,7 +60,7 @@ carbon:
         policies:
           - resolution: 5s
             retention: 168h
-      - pattern: stats.mean
+      - pattern: stats.mean.*
         aggregation:
           type: mean
         policies:
